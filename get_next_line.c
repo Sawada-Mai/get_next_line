@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 20:02:10 by msawada           #+#    #+#             */
-/*   Updated: 2024/06/06 15:36:10 by msawada          ###   ########.fr       */
+/*   Updated: 2024/06/06 15:54:34 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,29 @@ char	*add_char(char *line, char c, int line_size)
 	return (new_line);
 }
 
-char	get_char(int fd, int error)
+char	get_char(int fd)
 {
 	static char	buf[BUFFER_SIZE];
 	static char	*bufcpy;
 	static int	buf_count;
 
-	if (buf_count == 0 && error != 1)
+	if (buf_count == 0)
 	{
 		buf_count = read(fd, buf, BUFFER_SIZE);
 		bufcpy = buf;
 	}
 	buf_count -= 1;
-	if (buf_count >= 0 && error != 1)
+	if (buf_count >= 0)
 	{
 		return (*(bufcpy++));
 	}
-	else if (buf_count == -1 || error == 0)
+	else
 	{
 		ft_memset(buf, 0, BUFFER_SIZE);
 		bufcpy = NULL;
 		buf_count = 0;
 		return (EOF);
 	}
-	else
-		return (EOF);
 }
 
 char	*get_next_line(int fd)
@@ -88,15 +86,12 @@ char	*get_next_line(int fd)
 	line_size = 1;
 	while (1)
 	{
-		c = get_char(fd, 0);
+		c = get_char(fd);
 		if (c == EOF)
 			break ;
 		line = add_char(line, c, ++line_size);
 		if (line == NULL)
-		{
-			get_char(fd, 1);
 			return (NULL);
-		}
 		if (c == '\n')
 			break ;
 	}
