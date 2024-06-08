@@ -6,7 +6,7 @@
 /*   By: msawada <msawada@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 20:02:10 by msawada           #+#    #+#             */
-/*   Updated: 2024/06/06 15:54:34 by msawada          ###   ########.fr       */
+/*   Updated: 2024/06/08 16:15:36 by msawada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,28 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+
+// int	main(void)
+// {
+// 	int	fd = open("test", O_RDONLY);
+// 	char	*str;
+
+// 	str = NULL;
+// 	str = get_next_line(fd);
+// 	printf("\n(1)=%s$\n", str);
+// 	free(str);
+// 	str = get_next_line(fd);
+// 	printf("\n(2)=%s$\n", str);
+// 	free(str);
+// 	str = get_next_line(fd);
+// 	printf("\n(3)=%s$\n", str);
+// 	free(str);
+// 	str = get_next_line(fd);
+// 	printf("\n(4)=%s$\n", str);
+// 	free(str);
+// 	str = get_next_line(fd);
+// 	printf("\n(5)=%s$\n", str);
+// 	free(str);
+// 	system("leaks a.out");
+// 	close(fd);
+// }
